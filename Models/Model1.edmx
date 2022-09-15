@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Bills" EntityType="Model.Store.Bills" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bookings" EntityType="Model.Store.Bookings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clients" EntityType="Model.Store.Clients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Staffs" EntityType="Model.Store.Staffs" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_BookingBill" Association="Model.Store.FK_BookingBill">
+      <End Role="Bills" EntitySet="Bills" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="ClientsBookings" Association="Model.Store.ClientsBookings">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="StaffsBookings" Association="Model.Store.StaffsBookings">
+      <End Role="Staffs" EntitySet="Staffs" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bills">
+    <Key>
+      <PropertyRef Name="BillId" />
+    </Key>
+    <Property Name="BillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rating" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PriceAmount" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bookings">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingDate" Type="datetime" Nullable="false" />
+    <Property Name="Bill_BillId" Type="int" Nullable="false" />
+    <Property Name="ClientsClientId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientsFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientsLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientsEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientsDOB" Type="datetime" Nullable="false" />
+    <Property Name="ClientsPassword" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientsCity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientsPhoneNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StaffsStaffId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StaffsMajority" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StaffsFirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StaffsLastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StaffsGender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StaffsEmail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StaffsPhoneNumber" Type="int" Nullable="false" />
+    <Property Name="StaffsPassword" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="ClientId" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="DOB" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="City" />
+      <PropertyRef Name="PhoneNumber" />
+    </Key>
+    <Property Name="ClientId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Staffs">
+    <Key>
+      <PropertyRef Name="StaffId" />
+      <PropertyRef Name="Majority" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="PhoneNumber" />
+      <PropertyRef Name="Password" />
+    </Key>
+    <Property Name="StaffId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Majority" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_BookingBill">
+    <End Role="Bills" Type="Model.Store.Bills" Multiplicity="1" />
+    <End Role="Bookings" Type="Model.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bills">
+        <PropertyRef Name="BillId" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="Bill_BillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientsBookings">
+    <End Role="Clients" Type="Model.Store.Clients" Multiplicity="1" />
+    <End Role="Bookings" Type="Model.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ClientId" />
+        <PropertyRef Name="FirstName" />
+        <PropertyRef Name="LastName" />
+        <PropertyRef Name="Email" />
+        <PropertyRef Name="DOB" />
+        <PropertyRef Name="Password" />
+        <PropertyRef Name="City" />
+        <PropertyRef Name="PhoneNumber" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="ClientsClientId" />
+        <PropertyRef Name="ClientsFirstName" />
+        <PropertyRef Name="ClientsLastName" />
+        <PropertyRef Name="ClientsEmail" />
+        <PropertyRef Name="ClientsDOB" />
+        <PropertyRef Name="ClientsPassword" />
+        <PropertyRef Name="ClientsCity" />
+        <PropertyRef Name="ClientsPhoneNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StaffsBookings">
+    <End Role="Staffs" Type="Model.Store.Staffs" Multiplicity="1" />
+    <End Role="Bookings" Type="Model.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staffs">
+        <PropertyRef Name="StaffId" />
+        <PropertyRef Name="Majority" />
+        <PropertyRef Name="FirstName" />
+        <PropertyRef Name="LastName" />
+        <PropertyRef Name="Gender" />
+        <PropertyRef Name="Email" />
+        <PropertyRef Name="PhoneNumber" />
+        <PropertyRef Name="Password" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="StaffsStaffId" />
+        <PropertyRef Name="StaffsMajority" />
+        <PropertyRef Name="StaffsFirstName" />
+        <PropertyRef Name="StaffsLastName" />
+        <PropertyRef Name="StaffsGender" />
+        <PropertyRef Name="StaffsEmail" />
+        <PropertyRef Name="StaffsPhoneNumber" />
+        <PropertyRef Name="StaffsPassword" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bills">
+          <Key>
+            <PropertyRef Name="BillId" />
+          </Key>
+          <Property Name="BillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rating" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PriceAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_BookingBill" FromRole="Bills" ToRole="Bookings" />
+        </EntityType>
+        <EntityType Name="Bookings">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Bill_BillId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_BookingBill" FromRole="Bookings" ToRole="Bills" />
+          <NavigationProperty Name="Clients" Relationship="Model.ClientsBookings" FromRole="Bookings" ToRole="Clients" />
+          <Property Name="ClientsClientId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientsFirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientsLastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientsEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientsDOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClientsPassword" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientsCity" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClientsPhoneNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staffs" Relationship="Model.StaffsBookings" FromRole="Bookings" ToRole="Staffs" />
+          <Property Name="StaffsStaffId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StaffsMajority" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StaffsFirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StaffsLastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StaffsGender" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StaffsEmail" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StaffsPhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="StaffsPassword" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientId" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="DOB" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="ClientId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bookings" Relationship="Model.ClientsBookings" FromRole="Clients" ToRole="Bookings" />
+        </EntityType>
+        <EntityType Name="Staffs">
+          <Key>
+            <PropertyRef Name="StaffId" />
+            <PropertyRef Name="Majority" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="PhoneNumber" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="StaffId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Majority" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bookings" Relationship="Model.StaffsBookings" FromRole="Staffs" ToRole="Bookings" />
+        </EntityType>
+        <Association Name="FK_BookingBill">
+          <End Role="Bills" Type="Self.Bills" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bills">
+              <PropertyRef Name="BillId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="Bill_BillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bills" EntityType="Self.Bills" />
+          <EntitySet Name="Bookings" EntityType="Self.Bookings" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Staffs" EntityType="Self.Staffs" />
+          <AssociationSet Name="FK_BookingBill" Association="Self.FK_BookingBill">
+            <End Role="Bills" EntitySet="Bills" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="ClientsBookings" Association="Model.ClientsBookings">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="StaffsBookings" Association="Model.StaffsBookings">
+            <End Role="Staffs" EntitySet="Staffs" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="ClientsBookings">
+          <End Type="Model.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="Model.Bookings" Role="Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientId" />
+              <PropertyRef Name="FirstName" />
+              <PropertyRef Name="LastName" />
+              <PropertyRef Name="Email" />
+              <PropertyRef Name="DOB" />
+              <PropertyRef Name="Password" />
+              <PropertyRef Name="City" />
+              <PropertyRef Name="PhoneNumber" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="ClientsClientId" />
+              <PropertyRef Name="ClientsFirstName" />
+              <PropertyRef Name="ClientsLastName" />
+              <PropertyRef Name="ClientsEmail" />
+              <PropertyRef Name="ClientsDOB" />
+              <PropertyRef Name="ClientsPassword" />
+              <PropertyRef Name="ClientsCity" />
+              <PropertyRef Name="ClientsPhoneNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StaffsBookings">
+          <End Type="Model.Staffs" Role="Staffs" Multiplicity="1" />
+          <End Type="Model.Bookings" Role="Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staffs">
+              <PropertyRef Name="StaffId" />
+              <PropertyRef Name="Majority" />
+              <PropertyRef Name="FirstName" />
+              <PropertyRef Name="LastName" />
+              <PropertyRef Name="Gender" />
+              <PropertyRef Name="Email" />
+              <PropertyRef Name="PhoneNumber" />
+              <PropertyRef Name="Password" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="StaffsStaffId" />
+              <PropertyRef Name="StaffsMajority" />
+              <PropertyRef Name="StaffsFirstName" />
+              <PropertyRef Name="StaffsLastName" />
+              <PropertyRef Name="StaffsGender" />
+              <PropertyRef Name="StaffsEmail" />
+              <PropertyRef Name="StaffsPhoneNumber" />
+              <PropertyRef Name="StaffsPassword" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+    <EntitySetMapping Name="Bills">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Bills)">
+        <MappingFragment StoreEntitySet="Bills">
+          <ScalarProperty Name="BillId" ColumnName="BillId" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="PriceAmount" ColumnName="PriceAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Bookings)">
+        <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="Bill_BillId" ColumnName="Bill_BillId" />
+          <ScalarProperty Name="ClientsClientId" ColumnName="ClientsClientId" />
+          <ScalarProperty Name="ClientsFirstName" ColumnName="ClientsFirstName" />
+          <ScalarProperty Name="ClientsLastName" ColumnName="ClientsLastName" />
+          <ScalarProperty Name="ClientsEmail" ColumnName="ClientsEmail" />
+          <ScalarProperty Name="ClientsDOB" ColumnName="ClientsDOB" />
+          <ScalarProperty Name="ClientsPassword" ColumnName="ClientsPassword" />
+          <ScalarProperty Name="ClientsCity" ColumnName="ClientsCity" />
+          <ScalarProperty Name="ClientsPhoneNumber" ColumnName="ClientsPhoneNumber" />
+          <ScalarProperty Name="StaffsStaffId" ColumnName="StaffsStaffId" />
+          <ScalarProperty Name="StaffsMajority" ColumnName="StaffsMajority" />
+          <ScalarProperty Name="StaffsFirstName" ColumnName="StaffsFirstName" />
+          <ScalarProperty Name="StaffsLastName" ColumnName="StaffsLastName" />
+          <ScalarProperty Name="StaffsGender" ColumnName="StaffsGender" />
+          <ScalarProperty Name="StaffsEmail" ColumnName="StaffsEmail" />
+          <ScalarProperty Name="StaffsPhoneNumber" ColumnName="StaffsPhoneNumber" />
+          <ScalarProperty Name="StaffsPassword" ColumnName="StaffsPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Clients)">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Staffs)">
+        <MappingFragment StoreEntitySet="Staffs">
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="Majority" ColumnName="Majority" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
