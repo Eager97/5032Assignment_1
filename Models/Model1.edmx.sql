@@ -100,6 +100,14 @@ CREATE TABLE [dbo].[Staffs] (
 );
 GO
 
+-- Creating table 'Bookings'
+CREATE TABLE [dbo].[Bookings] (
+    [BookingId] int IDENTITY(1,1) NOT NULL,
+    [ClientClientId] nvarchar(max)  NOT NULL,
+    [StaffStaffId] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
