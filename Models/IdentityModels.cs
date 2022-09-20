@@ -29,5 +29,7 @@ namespace _5032Assignment_1.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<_5032Assignment_1.Models.Client> Clients { get; set; }
     }
 }

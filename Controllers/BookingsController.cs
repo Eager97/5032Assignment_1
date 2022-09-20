@@ -28,7 +28,7 @@ namespace _5032Assignment_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bookings booking = db.Bookings.Find(id);
+            Booking booking = db.Bookings.Find(id);
             if (booking == null)
             {
                 return HttpNotFound();
@@ -49,7 +49,7 @@ namespace _5032Assignment_1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookingId,ClientClientId,StaffStaffId")] Bookings booking)
+        public ActionResult Create([Bind(Include = "BookingId,ClientClientId,StaffStaffId")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace _5032Assignment_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bookings booking = db.Bookings.Find(id);
+            Booking booking = db.Bookings.Find(id);
             if (booking == null)
             {
                 return HttpNotFound();
@@ -85,7 +85,7 @@ namespace _5032Assignment_1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookingId,ClientClientId,StaffStaffId")] Bookings booking)
+        public ActionResult Edit([Bind(Include = "BookingId,ClientClientId,StaffStaffId")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -105,7 +105,7 @@ namespace _5032Assignment_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bookings booking = db.Bookings.Find(id);
+            Booking booking = db.Bookings.Find(id);
             if (booking == null)
             {
                 return HttpNotFound();
@@ -118,7 +118,7 @@ namespace _5032Assignment_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Bookings booking = db.Bookings.Find(id);
+            Booking booking = db.Bookings.Find(id);
             db.Bookings.Remove(booking);
             db.SaveChanges();
             return RedirectToAction("Index");

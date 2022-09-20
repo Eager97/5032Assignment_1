@@ -25,9 +25,9 @@ namespace _5032Assignment_1.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bills> Bills { get; set; }
-        public virtual DbSet<Bookings> Bookings { get; set; }
-        public virtual DbSet<Clients> Clients { get; set; }
-        public virtual DbSet<Staffs> Staffs { get; set; }
+        public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
     }
 }

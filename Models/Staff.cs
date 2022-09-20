@@ -21,6 +21,13 @@ namespace _5032Assignment_1.Models
         }
     
         public string StaffId { get; set; }
+        public string Majority { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
+        public string Email { get; set; }
+        public int PhoneNumber { get; set; }
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }

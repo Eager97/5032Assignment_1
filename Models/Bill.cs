@@ -12,24 +12,19 @@ namespace _5032Assignment_1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Staffs
+    public partial class Bill
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Staffs()
+        public Bill()
         {
-            this.Bookings = new HashSet<Bookings>();
+            this.Bookings = new HashSet<Booking>();
         }
     
-        public string StaffId { get; set; }
-        public string Majority { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Gender { get; set; }
-        public string Email { get; set; }
-        public int PhoneNumber { get; set; }
-        public string Password { get; set; }
+        public int BillId { get; set; }
+        public string Rating { get; set; }
+        public string PriceAmount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bookings> Bookings { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }

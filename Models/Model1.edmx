@@ -163,7 +163,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Bills">
+        <EntityType Name="Bill">
           <Key>
             <PropertyRef Name="BillId" />
           </Key>
@@ -172,7 +172,7 @@
           <Property Name="PriceAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_BookingBill" FromRole="Bills" ToRole="Bookings" />
         </EntityType>
-        <EntityType Name="Bookings">
+        <EntityType Name="Booking">
           <Key>
             <PropertyRef Name="BookingId" />
           </Key>
@@ -199,7 +199,7 @@
           <Property Name="StaffsPhoneNumber" Type="Int32" Nullable="false" />
           <Property Name="StaffsPassword" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Clients">
+        <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ClientId" />
             <PropertyRef Name="FirstName" />
@@ -220,7 +220,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Bookings" Relationship="Model.ClientsBookings" FromRole="Clients" ToRole="Bookings" />
         </EntityType>
-        <EntityType Name="Staffs">
+        <EntityType Name="Staff">
           <Key>
             <PropertyRef Name="StaffId" />
             <PropertyRef Name="Majority" />
@@ -242,8 +242,8 @@
           <NavigationProperty Name="Bookings" Relationship="Model.StaffsBookings" FromRole="Staffs" ToRole="Bookings" />
         </EntityType>
         <Association Name="FK_BookingBill">
-          <End Role="Bills" Type="Self.Bills" Multiplicity="1" />
-          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <End Role="Bills" Type="Model.Bill" Multiplicity="1" />
+          <End Role="Bookings" Type="Model.Booking" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bills">
               <PropertyRef Name="BillId" />
@@ -254,10 +254,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Bills" EntityType="Self.Bills" />
-          <EntitySet Name="Bookings" EntityType="Self.Bookings" />
-          <EntitySet Name="Clients" EntityType="Self.Clients" />
-          <EntitySet Name="Staffs" EntityType="Self.Staffs" />
+          <EntitySet Name="Bills" EntityType="Model.Bill" />
+          <EntitySet Name="Bookings" EntityType="Model.Booking" />
+          <EntitySet Name="Clients" EntityType="Model.Client" />
+          <EntitySet Name="Staffs" EntityType="Model.Staff" />
           <AssociationSet Name="FK_BookingBill" Association="Self.FK_BookingBill">
             <End Role="Bills" EntitySet="Bills" />
             <End Role="Bookings" EntitySet="Bookings" />
@@ -272,8 +272,8 @@
           </AssociationSet>
         </EntityContainer>
         <Association Name="ClientsBookings">
-          <End Type="Model.Clients" Role="Clients" Multiplicity="1" />
-          <End Type="Model.Bookings" Role="Bookings" Multiplicity="*" />
+          <End Type="Model.Client" Role="Clients" Multiplicity="1" />
+          <End Type="Model.Booking" Role="Bookings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="ClientId" />
@@ -298,8 +298,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="StaffsBookings">
-          <End Type="Model.Staffs" Role="Staffs" Multiplicity="1" />
-          <End Type="Model.Bookings" Role="Bookings" Multiplicity="*" />
+          <End Type="Model.Staff" Role="Staffs" Multiplicity="1" />
+          <End Type="Model.Booking" Role="Bookings" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staffs">
               <PropertyRef Name="StaffId" />
@@ -330,7 +330,7 @@
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
     <EntitySetMapping Name="Bills">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Bills)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Bill)">
         <MappingFragment StoreEntitySet="Bills">
           <ScalarProperty Name="BillId" ColumnName="BillId" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
@@ -339,7 +339,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Bookings">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Bookings)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Booking)">
         <MappingFragment StoreEntitySet="Bookings">
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
@@ -364,7 +364,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Clients">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Clients)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Client)">
         <MappingFragment StoreEntitySet="Clients">
           <ScalarProperty Name="ClientId" ColumnName="ClientId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -378,7 +378,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Staffs">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Staffs)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Staff)">
         <MappingFragment StoreEntitySet="Staffs">
           <ScalarProperty Name="StaffId" ColumnName="StaffId" />
           <ScalarProperty Name="Majority" ColumnName="Majority" />

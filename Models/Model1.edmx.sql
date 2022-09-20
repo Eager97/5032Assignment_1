@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 09/16/2022 23:21:55
+-- Date Created: 09/16/2022 23:58:41
 -- Generated from EDMX file: D:\Semester3\FIT5032\Assignment\5032Assignment_1\Models\Model1.edmx
 -- --------------------------------------------------
 
@@ -20,6 +20,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_BookingBill]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Bookings] DROP CONSTRAINT [FK_BookingBill];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ClientsBookings]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Bookings] DROP CONSTRAINT [FK_ClientsBookings];
+GO
+IF OBJECT_ID(N'[dbo].[FK_StaffsBookings]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Bookings] DROP CONSTRAINT [FK_StaffsBookings];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -31,11 +37,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Bookings]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Bookings];
 GO
-IF OBJECT_ID(N'[ModelStoreContainer].[Clients]', 'U') IS NOT NULL
-    DROP TABLE [ModelStoreContainer].[Clients];
+IF OBJECT_ID(N'[dbo].[Clients]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Clients];
 GO
-IF OBJECT_ID(N'[ModelStoreContainer].[Staffs]', 'U') IS NOT NULL
-    DROP TABLE [ModelStoreContainer].[Staffs];
+IF OBJECT_ID(N'[dbo].[Staffs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Staffs];
 GO
 
 -- --------------------------------------------------
@@ -97,14 +103,6 @@ CREATE TABLE [dbo].[Staffs] (
     [Email] nvarchar(max)  NOT NULL,
     [PhoneNumber] int  NOT NULL,
     [Password] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'Bookings'
-CREATE TABLE [dbo].[Bookings] (
-    [BookingId] int IDENTITY(1,1) NOT NULL,
-    [ClientClientId] nvarchar(max)  NOT NULL,
-    [StaffStaffId] nvarchar(max)  NOT NULL
 );
 GO
 

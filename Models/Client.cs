@@ -22,6 +22,12 @@ namespace _5032Assignment_1.Models
     
         public string ClientId { get; set; }
         public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public System.DateTime DOB { get; set; }
+        public string Password { get; set; }
+        public string City { get; set; }
+        public string PhoneNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }

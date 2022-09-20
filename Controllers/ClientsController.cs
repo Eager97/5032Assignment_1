@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _5032Assignment_1.Models;
-using Microsoft.AspNet.Identity;
 
 namespace _5032Assignment_1.Controllers
 {
@@ -28,7 +27,7 @@ namespace _5032Assignment_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Clients client = db.Clients.Find(id);
+            Client client = db.Clients.Find(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -37,12 +36,9 @@ namespace _5032Assignment_1.Controllers
         }
 
         // GET: Clients/Create
-        [Authorize(Roles = "Client")]
         public ActionResult Create()
         {
-            Clients client = new Clients();
-            client.ClientId = User.Identity.GetUserId();
-            return View(client);
+            return View();
         }
 
         // POST: Clients/Create
@@ -50,7 +46,7 @@ namespace _5032Assignment_1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClientId,FirstName,LastName,Email,DOB,password,City,PhoneNumber")] Clients client)
+        public ActionResult Create([Bind(Include = "ClientId,FirstName,LastName,Email,DOB,Password,City,PhoneNumber")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -63,14 +59,13 @@ namespace _5032Assignment_1.Controllers
         }
 
         // GET: Clients/Edit/5
-        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Clients client = db.Clients.Find(id);
+            Client client = db.Clients.Find(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -83,7 +78,7 @@ namespace _5032Assignment_1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientId,FirstName")] Clients client)
+        public ActionResult Edit([Bind(Include = "ClientId,FirstName,LastName,Email,DOB,Password,City,PhoneNumber")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +96,7 @@ namespace _5032Assignment_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Clients client = db.Clients.Find(id);
+            Client client = db.Clients.Find(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -114,7 +109,7 @@ namespace _5032Assignment_1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Clients client = db.Clients.Find(id);
+            Client client = db.Clients.Find(id);
             db.Clients.Remove(client);
             db.SaveChanges();
             return RedirectToAction("Index");
